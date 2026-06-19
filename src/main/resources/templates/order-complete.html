@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::main})}">
+<body>
+    <main>
+        <div class="container">
+            <div class="complete-card">
+                <!-- Success Neon Check Icon -->
+                <div class="complete-icon">✦</div>
+                
+                <h1 class="complete-title">Order Completed!</h1>
+                <p class="complete-subtitle">주문이 정상적으로 접수되었습니다. 소중한 상품을 빠르게 준비하여 배송해 드리겠습니다.</p>
+                
+                <!-- Order Delivery Details -->
+                <div class="info-table-wrapper">
+                    <table class="info-table">
+                        <tbody>
+                            <tr>
+                                <th>주문 번호</th>
+                                <td th:text="${order.orderNumber}" style="color: var(--accent-color);">ORD-000000</td>
+                            </tr>
+                            <tr>
+                                <th>주문자명</th>
+                                <td th:text="${order.customerName}">홍길동</td>
+                            </tr>
+                            <tr>
+                                <th>연락처</th>
+                                <td th:text="${order.customerPhone}">010-0000-0000</td>
+                            </tr>
+                            <tr>
+                                <th>배송지 주소</th>
+                                <td th:text="${order.shippingAddress}">서울특별시 강남구 ...</td>
+                            </tr>
+                            <tr>
+                                <th>최종 결제액</th>
+                                <td th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA')} + ' 원'">0원</td>
+                            </tr>
+                            <tr>
+                                <th>주문 일시</th>
+                                <td th:text="${#temporals.format(order.insDt, 'yyyy-MM-dd HH:mm:ss')}">2026-06-20 02:00:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Order Item Summary List -->
+                <div style="text-align: left; margin-bottom: 40px; border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; background-color: var(--bg-card);">
+                    <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">주문 상품 명세</h3>
+                    <div th:each="item : ${orderItems}" style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.95rem;">
+                        <span th:text="${item.product.name} + ' (x' + ${item.quantity} + ')'" style="font-weight: 600;">Product (x1)</span>
+                        <span th:text="${#numbers.formatInteger(item.price * item.quantity, 3, 'COMMA')} + ' 원'" style="font-weight: 700;">0원</span>
+                    </div>
+                </div>
+
+                <!-- Back to Shopping Button -->
+                <a th:href="@{/}" class="btn btn-primary" style="padding: 15px 40px;">계속 쇼핑하기</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

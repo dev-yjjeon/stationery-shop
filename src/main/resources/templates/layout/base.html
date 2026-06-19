@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palette Space</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <script th:src="@{/js/app.js}" defer></script>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a th:href="@{/}" class="logo">Palette Space</a>
+            <div class="nav-actions">
+                <a th:href="@{/cart}" class="cart-icon">
+                    🛒
+                    <span th:if="${cartCount > 0}" th:text="${cartCount}" class="cart-badge">0</span>
+                </a>
+                <button id="theme-toggle" class="theme-toggle-btn">☀️</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div th:replace="${content}"></div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">Palette Space</div>
+            <p>&copy; 2026 Palette Space. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

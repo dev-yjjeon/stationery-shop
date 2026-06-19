@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{layout/base :: layout(~{::main})}">
+<body>
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-banner">
+                    <h1 class="hero-title">Aesthetic <span>Palette Space</span></h1>
+                    <p class="hero-subtitle">20대 일러스트레이터와 크리에이터들을 위한 감성 문구 셀렉트샵. 당신의 일상에 빛나는 영감을 더해보세요.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="container">
+                <h2 class="section-title">Inspirational Items</h2>
+                
+                <!-- Category Filter Buttons -->
+                <div class="category-filter">
+                    <button type="button" class="filter-btn active" onclick="filterCategory('ALL', this)">ALL</button>
+                    <button type="button" class="filter-btn" onclick="filterCategory('STICKER', this)">STICKER</button>
+                    <button type="button" class="filter-btn" onclick="filterCategory('NOTE', this)">NOTE</button>
+                    <button type="button" class="filter-btn" onclick="filterCategory('WRITING', this)">WRITING</button>
+                    <button type="button" class="filter-btn" onclick="filterCategory('POSTER', this)">POSTER</button>
+                    <button type="button" class="filter-btn" onclick="filterCategory('LIFESTYLE', this)">LIFESTYLE</button>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="product-grid">
+                    <div class="product-card" th:each="product : ${products}" th:data-category="${product.category}">
+                        <div class="product-img-wrapper">
+                            <span class="product-badge" th:text="${product.category}">STICKER</span>
+                            <img class="product-img" th:src="${product.imageUrl}" th:alt="${product.name}">
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title" th:text="${product.name}">Product Name</h3>
+                            <div class="product-price">
+                                <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">0</span>
+                                <a th:href="@{/product/{id}(id=${product.id})}" class="view-detail-btn">View Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <script>
+            function filterCategory(category, button) {
+                document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                document.querySelectorAll('.product-card').forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    if (category === 'ALL' || cardCategory === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        </script>
+    </main>
+</body>
+</html>
