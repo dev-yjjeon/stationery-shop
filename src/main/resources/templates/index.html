@@ -6,8 +6,10 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-banner" style="background-image: url('/images/sanho_hero.png'); background-size: cover; background-position: center;">
-                    <h1 class="hero-title">산호 문구점 (sanho's room)</h1>
-                    <p class="hero-subtitle">일러스트레이터 산호의 포근하고 몽글몽글한 그림들을 귀여운 굿즈로 만나보세요.</p>
+                    <div class="hero-content-box">
+                        <h1 class="hero-title">산호 문구점 (sanho's room)</h1>
+                        <p class="hero-subtitle">일러스트레이터 산호의 포근하고 몽글몽글한 그림들을 귀여운 굿즈로 만나보세요.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -29,7 +31,7 @@
 
                 <!-- Product Grid -->
                 <div class="product-grid">
-                    <div class="product-card" th:each="product : ${products}" th:data-category="${product.category}">
+                    <div class="product-card" th:each="product : ${products}" th:data-category="${product.category}" th:onclick="|location.href='@{/product/{id}(id=${product.id})}'|" style="cursor: pointer;">
                         <div class="product-img-wrapper">
                             <span class="product-badge" th:text="${product.category}">STICKER</span>
                             <img class="product-img" th:src="${product.imageUrl}" th:alt="${product.name}">
@@ -38,7 +40,7 @@
                             <h3 class="product-title" th:text="${product.name}">Product Name</h3>
                             <div class="product-price">
                                 <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA')}">0</span>
-                                <a th:href="@{/product/{id}(id=${product.id})}" class="view-detail-btn">View Detail</a>
+                                <a th:href="@{/product/{id}(id=${product.id})}" class="view-detail-btn" onclick="event.stopPropagation();">View Detail</a>
                             </div>
                         </div>
                     </div>
