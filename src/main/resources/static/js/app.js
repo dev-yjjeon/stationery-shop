@@ -1,30 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Theme Toggle Initialization
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark'; // default to dark theme
+    const btnPink = document.getElementById('theme-pink');
+    const btnMint = document.getElementById('theme-mint');
+    const currentTheme = localStorage.getItem('theme') || 'theme-pink'; // default to theme-pink
     
-    document.documentElement.setAttribute('data-theme', currentTheme);
-    updateToggleIcon(themeToggleBtn, currentTheme);
+    document.body.classList.add(currentTheme);
 
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            let newTheme = theme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            updateToggleIcon(themeToggleBtn, newTheme);
+    if (btnPink) {
+        btnPink.addEventListener('click', () => {
+            document.body.classList.remove('theme-mint');
+            document.body.classList.add('theme-pink');
+            localStorage.setItem('theme', 'theme-pink');
+        });
+    }
+    if (btnMint) {
+        btnMint.addEventListener('click', () => {
+            document.body.classList.remove('theme-pink');
+            document.body.classList.add('theme-mint');
+            localStorage.setItem('theme', 'theme-mint');
         });
     }
 });
-
-function updateToggleIcon(btn, theme) {
-    if (!btn) return;
-    if (theme === 'light') {
-        btn.textContent = '🌙'; // Icon to switch back to Dark mode
-    } else {
-        btn.textContent = '☀️'; // Icon to switch back to Light mode
-    }
-}
 
 // 2. Cart AJAX Operations
 const Cart = {

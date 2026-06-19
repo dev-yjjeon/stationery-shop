@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Palette Space</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <script th:src="@{/js/app.js}" defer></script>
 </head>
@@ -16,7 +17,10 @@
                     🛒
                     <span th:if="${cartCount > 0}" th:text="${cartCount}" class="cart-badge">0</span>
                 </a>
-                <button id="theme-toggle" class="theme-toggle-btn">☀️</button>
+                <div class="theme-switcher">
+                    <button id="theme-pink" class="theme-btn theme-btn-pink" title="솜사탕 핑크">🌸</button>
+                    <button id="theme-mint" class="theme-btn theme-btn-mint" title="멜론 민트">🌿</button>
+                </div>
             </div>
         </div>
     </header>
